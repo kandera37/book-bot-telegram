@@ -23,3 +23,6 @@ venv/
 *.jpeg
 *.png
 *.pdf
+
+# macOS
+.DS_Store
