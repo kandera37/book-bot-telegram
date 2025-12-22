@@ -7,8 +7,8 @@ The idea is simple: a user opens the bot, sees a short description, goes to an e
 
 ## Overview
 
-The bot is aimed at authors or small project that want a minimal, no-frills way to sell a single digital product though Telegram.
-Payment itself happens on an external page; the bot only handles the flow around it and keeps tracks of buyers
+The bot is aimed at authors or small projects that want a minimal, no-frills way to sell a single digital product through Telegram.
+Payment itself happens on an external page; the bot only handles the flow around it and keeps track of buyers
 
 ---
 
@@ -43,8 +43,8 @@ app/
     keyboards.py       # inline keyboards
     config.py          # configuration, paths, .env loading
     services/
-    payments.py        # payment / purchase storage logic
-    crm.py             # simple CRM: user tracking, first
+        payments.py    # payment / purchase storage logic
+        crm.py         # simple CRM: user tracking, first
    
 data/
     book.pdf           # the book file
@@ -65,7 +65,7 @@ README.md
     ```
 2. (Optional) Create and activate virtual environment:
     ```bash
-   pytnon -m venv .venv
+   python -m venv .venv
    source .venv/bin/activate      # Windows: .venv\Scripts\activate
     ```
 3. Install dependencies:
@@ -76,16 +76,16 @@ README.md
 ---
 
 ## Configuration
-Create a `.env` file in the project root:
+Copy `.env.example` to .env and fill in your values:
+```bash
+cp .env.example .env
+```
+Then edit .env and set:
 ```dotenv
-BOT_TOKEN=your_telegram_bot_token
-PAY_URL=https://your-payment-page-url
+BOT_TOKEN=...
+PAY_URL=...
 ```
-Then place your book file here:
-```text
-data/book.pdf
-```
-If you want to show an into image on `/start`, you can also add files like:
+If you want to show an intro image on `/start`, you can also add files like:
 ```text
 data/images/01_intro.jpg
 data/images/02_author.jpg
@@ -105,12 +105,12 @@ Open Telegram, find your bot and send `/start` to begin.
 
 ## Fake payment flow
 In this version, there is no real payment provider integration. The flow is intentionally simple:
-1. The user taps the "Buy book💳" button and goes to an external payment page (PAY_URL).
+1. The user taps the "Buy book 💳" button and goes to an external payment page (PAY_URL).
 2. After payment, the user returns to the bot and sends `/i_paid`.
-3. The bot marks the user as pain in the SQLite database.
+3. The bot marked as paid in the SQLite database.
 4. The next `/get_book` call sends the PDF book.
 
-This setup is enough for a prototype or the internal use, and it keeps the bot logic independent of any specific payment service.
+This setup is enough for a prototype or for internal use, and it keeps the bot logic independent of any specific payment service.
 
 ---
 
@@ -119,7 +119,7 @@ This setup is enough for a prototype or the internal use, and it keeps the bot l
 I treat this project as a small but complete example of Telegram bot:
 - Structure - code is split into modules (`handlers`, `keyboards`, `services`, `config`) instead of one big script.
 - Configuration - the bot token and payment URL are loaded from `.env`; secrets are not hard-coded and should not be committed to the repository.
-- Database layer - SQLite is used for storing users and purchases; there is a separate CRM module that keeps of `first_seen/last_seen` timestamps.
+- Database layer - SQLite is used for storing users and purchases; there is a separate CRM module that keeps track of `first_seen/last_seen` timestamps.
 - Logging - key actions (commands, book delivery, broadcast failures) are logged using the standard logging module.
 
 In a real production setup this bot could be extended with a proper payment provider integration, more detailed CRM, and additional admin tooling. For now, it shows how I structure and ship a small, self-contained Python project.
