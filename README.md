@@ -61,7 +61,7 @@ README.md
 1. Clone the repository and go to the project directory:
     ```bash
    git clone https://github.com/kandera37/book-bot-telegram.git
-   cd <repo-name> 
+   cd book-bot-telegram 
     ```
 2. (Optional) Create and activate virtual environment:
     ```bash
