@@ -60,7 +60,7 @@ README.md
 
 1. Clone the repository and go to the project directory:
     ```bash
-   git clone https://github.com/<username>/<repo-name>.git
+   git clone https://github.com/kandera37/book-bot-telegram.git
    cd <repo-name> 
     ```
 2. (Optional) Create and activate virtual environment:
@@ -96,7 +96,7 @@ Images are loaded from the `data/images` folder and sorted by file name.
 
 ## Running the bot
 ```bash
-  python -m app.main
+python -m app.main
 ```
 The bot will start in polling mode.
 Open Telegram, find your bot and send `/start` to begin.
